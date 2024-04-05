@@ -28,7 +28,8 @@ def devices_list():
 
 @app.route('/devices/<id>')
 def show_device(id):
-    os.system("scrcpy")
+    cmd = "scrcpy -s " + str(id)
+    os.system(cmd)
     return 'Return to List of Devices'
 
 @app.errorhandler(404)
