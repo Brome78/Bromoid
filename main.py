@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 import os
 
 app = Flask(__name__, static_url_path='/static', static_folder='static')
@@ -6,6 +6,12 @@ app = Flask(__name__, static_url_path='/static', static_folder='static')
 @app.route('/')
 def index():
     return 'Hello, world! This is a Flask server.'
+
+@app.route('/devices/<id>')
+def show_device(id):
+    cmd = "scrcpy -s " + str(id)
+    os.system(cmd)
+    return redirect(url_for('devices_list'))
 
 @app.route('/devices')
 def devices_list():
@@ -25,12 +31,6 @@ def devices_list():
         script += "var item1 = document.getElementById('"+tmp[0]+"');item1.addEventListener('click', function() {window.location.href = 'devices/"+tmp[0]+"';});"
     
     return render_template('list_devices.html',list=elt,script=script)
-
-@app.route('/devices/<id>')
-def show_device(id):
-    cmd = "scrcpy -s " + str(id)
-    os.system(cmd)
-    return 'Return to List of Devices'
 
 @app.errorhandler(404)
 def page_not_found(error):
