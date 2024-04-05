@@ -3,10 +3,6 @@ import os
 
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 
-t = "fd"
-t = t.replace("fd","ag",-1)
-print(t)
-
 @app.route('/')
 def index():
     return 'Hello, world! This is a Flask server.'
@@ -18,11 +14,12 @@ def devices_list():
     devices_list = f.readlines()
 
     devices_list.pop(0)
+    devices_list.pop(-1)
 
     elt = ""
 
     for device in devices_list:
-        elt += "<li>" + device + "</li>"
+        elt += "<li><img src=\"static/default_device.png\" alt=\"Image 1\">" + device + "</li>"
     
     return render_template('list_devices.html',list=elt)
 
@@ -30,10 +27,6 @@ def devices_list():
 def page_not_found(error):
     # Render a custom 404 page
     return render_template('404.html'), 404
-
-@app.route('/404')
-def error_404():
-    return render_template('404.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
