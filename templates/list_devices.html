@@ -40,7 +40,7 @@
     <div class="container">
         <h1>All Devices Available</h1>
         <ul>
-            <li>{{ list }}</li>
+            {{ list | safe }}
         </ul>
     </div>
 </body>

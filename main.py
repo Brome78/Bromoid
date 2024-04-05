@@ -15,9 +15,16 @@ def index():
 def devices_list():
     os.system("adb devices > .list")
     f = open(".list")
-    devices_list = f.read()
+    devices_list = f.readlines()
+
+    devices_list.pop(0)
+
+    elt = ""
+
+    for device in devices_list:
+        elt += "<li>" + device + "</li>"
     
-    return render_template('list_devices.html',list=devices_list)
+    return render_template('list_devices.html',list=elt)
 
 @app.errorhandler(404)
 def page_not_found(error):
