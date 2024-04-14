@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Funny List</title>
+    <title>Options {{ id }}</title>
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon_main.ico') }}">
     <style>
         /* CSS for styling the list */
@@ -30,14 +30,9 @@
             background-color: #ffc107;
             border-radius: 5px;
             margin-bottom: 10px;
-            cursor: pointer; /* Change cursor to pointer on hover */
             display: flex; /* Use flexbox layout */
             justify-content: space-between; /* Space between items */
             align-items: center; /* Center items vertically */
-        }
-        li:hover {
-            background-color: #ff9800;
-            color: #fff;
         }
         img {
             width: 50px; /* Adjust the width of the image */
@@ -45,24 +40,51 @@
             margin-right: 10px;
             display: inline-block; /* Add some margin to the right of the image */
         }
+        input {
+            width: 575px;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            justify-content: space-between;
+            display: flex;
+            
+        }
         .img_option {
             width: 50px; /* Adjust the width of the image */
              /* Align the image vertically within the list item */
             float: right; /* Add some margin to the right of the image */
         }
+        button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #2e6930;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>All Devices Available</h1>
+        <h1>Option of device : {{ id }}</h1>
         <ul>
             {{ list | safe }}
         </ul>
     </div>
     <script>
 
-        function redirectToInfo(id) {
-           window.location.href = '/info/'+id;
+        function saveFunction(id,but) {
+            var func = document.getElementById(but).value
+            window.location.href = '/save/'+id+'/'+func;
         }
         
         function redirectToDevice(id) {

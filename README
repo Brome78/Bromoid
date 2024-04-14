@@ -1,0 +1,22 @@
+Hi its a little interface uses Flask, adb and scrcpy to manage some android devices.
+
+You need to:
+
+pip install Flask
+
+Download and install scrcpy
+
+python3 main.py
+
+go to http://localhost:5000/
+
+Troobleshoot:
+
+If console return :
+
+Address already in use
+Port 5000 is in use by another program. Either identify and stop that program, or start the server with a different port.
+
+do :
+
+killall adb
